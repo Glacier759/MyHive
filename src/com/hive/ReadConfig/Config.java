@@ -10,6 +10,10 @@ public class Config {
 	private int mysqlPort;
 	private String mysqlUser;
 	private String mysqlPassword;
+	private String Username;
+	private String URL;
+	private String Tinfo;
+	private int Flag;
 	
 	public void setServerIP( String serverIP ) {	this.serverIP = serverIP;	}
 	public void setServerUser( String serverUser ) {	this.serverUser = serverUser;	}
@@ -20,6 +24,10 @@ public class Config {
 	public void setMysqlPort( int mysqlPort ) {	this.mysqlPort = mysqlPort;	}
 	public void setMysqlUser( String mysqlUser ) {	this.mysqlUser = mysqlUser;	}
 	public void setMysqlPassword( String mysqlPassword ) {	this.mysqlPassword = mysqlPassword;	}
+	public void setUsername( String Username ) {	this.Username = Username;	}
+	public void setURL( String URL ) {	this.URL = URL;	}
+	public void setTinfo( String Tinfo ) {	this.Tinfo = Tinfo;	}
+	public void setFlag( int Flag ) {	this.Flag = Flag;	}
 	
 	public String getServerIP( ) {	return this.serverIP;	}
 	public String getServerUser( ) {	return this.serverUser;	}
@@ -30,4 +38,8 @@ public class Config {
 	public int getMysqlPort( ) {	return this.mysqlPort;	}
 	public String getMysqlUser( ) {	return this.mysqlUser;	}
 	public String getMysqlPassword( ) {	return this.mysqlPassword;	}
+	public String getUsername( ) {	return this.Username;	}
+	public String getURL(  ) {	return this.URL;	}
+	public String getTinfo( ) {	return this.Tinfo;	}
+	public int getFlag( ) {	return this.Flag;	}
 }
