@@ -45,15 +45,17 @@ public class HiveSearch {
 					System.out.println("HiveSearch-doSaveData-45:\t" + e);
 					continue;
 				}
-				hiveParameter.hiveDatabase.insertUrl(purl);
-				new HiveSaveData(hiveParameter).doSaveToDB(Doc.title(), purl, Doc.html(), hiveParameter.Path);
+				//hiveParameter.hiveDatabase.insertUrl(purl);
+				new HiveSaveData(hiveParameter).doSaveToDB(Doc.title(), purl, Doc.html(), hiveParameter.Path, true);
 				Elements pageAllUrls = Doc.select("a[href]");
 				for ( Element pageAllUrl : pageAllUrls ) {
 					String pageUrl = pageAllUrl.attr("abs:href");
 					if ( pageUrl.isEmpty() )
 						continue;
 					String hostname = new URL(pageUrl).getHost();
-					if ( (hostname.equals(Hostname) && !(hiveParameter.hiveDatabase.isUniqueURL(pageUrl))) ) {
+					//if ( (hostname.equals(Hostname) && !(hiveParameter.hiveDatabase.isUniqueURL(pageUrl))) ) {
+					if ( (hostname.equals(Hostname)) && !(hiveParameter.hiveBloomFilter.isUniqueValue(pageUrl)) )	 {
+					//System.out.println("push redis" + hiveParameter.hiveRedis.getKey());
 						hiveParameter.hiveRedis.pushValue(pageUrl);
 						//hiveParameter.hiveDatabase.insertUrl(pageUrl); 	//抓取后再加入数据库才对
 					}

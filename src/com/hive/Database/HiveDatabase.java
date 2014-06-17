@@ -10,7 +10,7 @@ public class HiveDatabase {
 	private String DatabaseUrl = "jdbc:mysql://localhost/"; 	//默认为操作本机数据库
 	private Connection Conn;
 	
-	public HiveDatabase() {
+	/*public HiveDatabase() {
 		setDatabaseName( "Hive" );
 		setTableName( "UrlTable" );
 		setFieldName( "Url" );
@@ -197,5 +197,5 @@ public class HiveDatabase {
 		}
 		return (!this.isUniqueTableName(TableName));
 	}
-	
+	*/
 }

@@ -31,7 +31,7 @@ public class HiveSaveData {
 	}
 	
 	
-	public void doSaveToDB( String Title, String Link, String HTML, String SavePath ) {
+	public void doSaveToDB( String Title, String Link, String HTML, String SavePath, boolean isInsert ) {
 		XStream xstream = new XStream( new DomDriver() );
 		XMLFormat xmlFormat = new XMLFormat();
 		xstream.alias("hive", xmlFormat.getClass());
@@ -44,7 +44,10 @@ public class HiveSaveData {
 		try {
 			FileUtils.writeStringToFile(file, XML);
 			hiveParameter.hiveLog.SysLog("save ok!");
-			hiveParameter.hiveDatabase.insertUrl(Link);
+			if ( isInsert ) {
+				//hiveParameter.hiveDatabase.insertUrl(Link);
+				hiveParameter.hiveBloomFilter.addValue(Link);
+			}
 			//System.exit(0);
 		} catch( IOException e ) {
 			hiveParameter.hiveLog.ErrLog("write error!");

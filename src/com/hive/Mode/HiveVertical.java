@@ -26,7 +26,7 @@ public class HiveVertical {
 								.get();
 			System.out.println(hiveParameter.Url);
 			//hiveParameter.hiveDatabase.insertUrl(hiveParameter.Url);
-			new HiveSaveData(hiveParameter).doSaveToDB(Doc.title(), hiveParameter.Url, Doc.html(), hiveParameter.HostPathdir);
+			new HiveSaveData(hiveParameter).doSaveToDB(Doc.title(), hiveParameter.Url, Doc.html(), hiveParameter.HostPathdir, true);
 			
 			Elements pageAllUrls = Doc.select("a[href]");
 			for ( Element pageAllUrl : pageAllUrls ) {
@@ -36,7 +36,8 @@ public class HiveVertical {
 					continue;
 				System.out.println(pageUrl);
 				String hostname = new URL(pageUrl).getHost();
-				if ( (hostname.equals(hiveParameter.Hostname) && !(hiveParameter.hiveDatabase.isUniqueURL(pageUrl))) ) {
+				//if ( (hostname.equals(hiveParameter.Hostname) && !(hiveParameter.hiveDatabase.isUniqueURL(pageUrl))) ) {
+				if ( (hostname.equals(hiveParameter.Hostname)) && !(hiveParameter.hiveBloomFilter.isUniqueValue(pageUrl)) )	 {
 					hiveParameter.hiveRedis.pushValue(pageUrl);
 					//hiveParameter.hiveDatabase.insertUrl(pageUrl); 	//抓取后再加入数据库才对
 				}

@@ -54,6 +54,15 @@ public class HiveInit {
 		}
 		System.out.println("前提模块结束");
 		HiveFinal hiveFinal = new HiveFinal(hiveParameter);
-		new Thread(hiveFinal).start();
+		Thread obj1 = new Thread(hiveFinal);
+		Thread obj2 = new Thread(hiveFinal);
+		obj1.start();
+		obj2.start();
+		//List<Thread> hiveFinalThread = new ArrayList<Thread>();
+		//for ( int i = 0; i < 10; i ++ ) {
+		//	Thread obj = new Thread(hiveFinal);
+		//	hiveFinalThread.add(obj);
+		//	obj.start();
+		//}
 	}
 }

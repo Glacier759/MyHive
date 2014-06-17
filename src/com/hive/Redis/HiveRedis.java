@@ -3,11 +3,14 @@ package com.hive.Redis;
 import com.hive.ReadConfig.Config;
 
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 public class HiveRedis {
 	
 	private String Key;
 	private Jedis Redis;
+	public JedisPool pool;
 	static String RedisIP = null;
 	static int RedisPort;
 
@@ -32,13 +35,16 @@ public class HiveRedis {
 		return new Jedis(RedisIP, RedisPort).llen(username).intValue();
 	}
 	public void ConnectRedis(String host, int port) {
-		Redis = new Jedis(host, port);
+		pool = new JedisPool(new JedisPoolConfig(), host, port);
+		//Redis = pool.getResource();
 	}
 	public void ConnectRedis( String host ) {
-		Redis = new Jedis(host, 6379);
+		pool = new JedisPool(new JedisPoolConfig(), host, 6479);
+		//Redis = pool.getResource();
 	}
 	public void ConnectRedis() {
-		Redis = new Jedis("127.0.0.1", 6379);
+		pool = new JedisPool(new JedisPoolConfig(), "127.0.0.1", 6379);
+		//Redis = pool.getResource();
 	}
 	public void setKey( String Key ) {
 		this.Key = Key;
@@ -47,18 +53,36 @@ public class HiveRedis {
 		return Key;
 	}
 	public void pushValue( String Value ) {
+		Redis = pool.getResource();
 		Redis.lpush(Key, Value);
+		pool.returnResource(Redis);
+		//Redis.lpush(Key, Value);
 	}
 	public String popValue() {
-		return Redis.rpoplpush(Key, "Temp");
+		Redis = pool.getResource();
+		String Value = Redis.rpoplpush(Key, "Temp");
+		pool.returnResource(Redis);
+		return Value;
+		//return Redis.rpoplpush(Key, "Temp");
 	}
 	public int getLength() {
-		return Redis.llen(Key).intValue();
+		Redis = pool.getResource();
+		Long longLength = Redis.llen(Key);
+		int length = new Integer(String.valueOf(longLength));
+		pool.returnResource(Redis);
+		return length;
+		//return Redis.llen(Key).intValue();
 	}
 	public void delKey() {
+		Redis = pool.getResource();
 		Redis.del(Key);
+		pool.returnResource(Redis);
+		pool.destroy();
 	}
 	public void clearRedis() {
+		Redis = pool.getResource();
 		Redis.flushAll();
+		pool.returnResource(Redis);
+		pool.destroy();
 	}
 }

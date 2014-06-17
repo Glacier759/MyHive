@@ -1,5 +1,6 @@
 package com.hive.Parameter;
 
+import com.hive.BloomFilter.HiveBloomFilter;
 import com.hive.Database.HiveDatabase;
 import com.hive.Log.HiveLog;
 import com.hive.ReadConfig.Config;
@@ -23,17 +24,18 @@ public class HiveParameter {
 	public HiveRedis hiveRedis;
 	public HiveLog hiveLog;
 	public Config config = HiveConfig.getConfig();
+	public HiveBloomFilter hiveBloomFilter;
 	
 	public void OtherService() {
 		System.out.println(config.getMysqlIP());
 		// System.exit(0);
 		hiveLog = new HiveLog(config);
-		
-		hiveDatabase = new HiveDatabase( Username );
+		hiveBloomFilter = new HiveBloomFilter();
+		//hiveDatabase = new HiveDatabase( Username );
 		//hiveDatabase.setDatabaseUrl("jdbc:mysql://222.24.63.100/");
-		hiveDatabase.setDatabaseUrl("jdbc:mysql://"+config.getMysqlIP()+":"+config.getMysqlPort()+"/");
-		hiveDatabase.ConnectionDB( config.getMysqlUser(), config.getMysqlPassword() );
-		hiveDatabase.creatTable(Username);
+	//	hiveDatabase.setDatabaseUrl("jdbc:mysql://"+config.getMysqlIP()+":"+config.getMysqlPort()+"/");
+		//hiveDatabase.ConnectionDB( config.getMysqlUser(), config.getMysqlPassword() );
+	//	hiveDatabase.creatTable(Username);
 		
 		hiveRedis = new HiveRedis(config); 	//Redis有漏洞 多用户Key问题
 		//hiveRedis.ConnectRedis( "222.24.63.100", 9004 );
