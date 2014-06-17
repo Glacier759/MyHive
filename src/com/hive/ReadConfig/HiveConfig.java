@@ -7,7 +7,6 @@ import org.apache.commons.io.FileUtils;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-@SuppressWarnings("unused")
 public class HiveConfig {
 	public static void main(String[] args) throws Exception {
 		XStream xStream = new XStream( new DomDriver() );
@@ -25,6 +24,7 @@ public class HiveConfig {
 		config.setUsername("Glacier");
 		config.setURL("http://www.baidu.com");
 		config.setTinfo("糗事百科");
+		config.setTtag("钜派公司");
 		config.setFlag(2);
 		
 		System.out.println(xStream.toXML(config));

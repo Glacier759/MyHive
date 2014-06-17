@@ -2,6 +2,7 @@ package com.hive.Save;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
@@ -12,15 +13,29 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 class XMLFormat {
 	private String title;
-	private String link;
-	private String html;
+	private String crawltime;
+	private String modifytime;
+	private String source;
+	private String language;
+	private String encode;
+	private String body;
+	
 		
-	public String getTitle() {	return title;	}
-	public String getLink() {	return link;	}
-	public String getHtml() {	return html;	}
+	public String getTitle() {	return this.title;	}
+	public String getCrawltime() {	return this.crawltime;	}
+	public String getModifytime() {	return this.modifytime;	}
+	public String getSource() {	return this.source;	}
+	public String getLanguage() {	return this.language;	}
+	public String getEncode() {	return this.encode;	}
+	public String getBody() {	return this.body;	}
+	
 	public void setTitle( String title ) {	this.title = title;	}
-	public void setLink( String link ) {	this.link = link;	}
-	public void setHtml( String html ) {	this.html = html;	}
+	public void setCrawltime( String crawltime ) {	this.crawltime = crawltime;	}
+	public void setModifytime( String modifytime ) {	this.modifytime = modifytime;	}
+	public void setSource( String source ) {	this.source = source;	}
+	public void setLanguage( String language ) {	this.language = language;	}
+	public void setEncode( String encode ) {	this.encode =encode;	}
+	public void setBody( String body ) {	this.body =  body;	}
 }
 
 public class HiveSaveData {
@@ -31,14 +46,20 @@ public class HiveSaveData {
 	}
 	
 	
-	public void doSaveToDB( String Title, String Link, String HTML, String SavePath, boolean isInsert ) {
+	public void doSaveToDB( String Title, String Link, String Pinfo, String SavePath, boolean isInsert ) {
 		XStream xstream = new XStream( new DomDriver() );
 		XMLFormat xmlFormat = new XMLFormat();
 		xstream.alias("hive", xmlFormat.getClass());
+		SimpleDateFormat SDF = new SimpleDateFormat( "yyyy-MM-dd" );
 		File file = new File(SavePath + new Date().getTime() + ".xml");
 		xmlFormat.setTitle(Title);
-		xmlFormat.setLink(Link);
-		xmlFormat.setHtml(HTML);
+		xmlFormat.setCrawltime(SDF.format(new Date()));
+		xmlFormat.setModifytime("");
+		xmlFormat.setSource(Link);
+		xmlFormat.setLanguage("中文");
+		xmlFormat.setEncode("utf-8");
+		xmlFormat.setBody(Pinfo);
+		
 		String XML = xstream.toXML(xmlFormat);
 	//	System.out.println(XML);
 		try {

@@ -46,7 +46,7 @@ public class HiveSearch {
 					continue;
 				}
 				//hiveParameter.hiveDatabase.insertUrl(purl);
-				new HiveSaveData(hiveParameter).doSaveToDB(Doc.title(), purl, Doc.html(), hiveParameter.Path, true);
+				new HiveSaveData(hiveParameter).doSaveToDB(Doc.title(), purl, Doc.select("p").text(), hiveParameter.Path, true);
 				Elements pageAllUrls = Doc.select("a[href]");
 				for ( Element pageAllUrl : pageAllUrls ) {
 					String pageUrl = pageAllUrl.attr("abs:href");

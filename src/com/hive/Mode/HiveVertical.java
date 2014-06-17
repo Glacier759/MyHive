@@ -26,7 +26,7 @@ public class HiveVertical {
 								.get();
 			System.out.println(hiveParameter.Url);
 			//hiveParameter.hiveDatabase.insertUrl(hiveParameter.Url);
-			new HiveSaveData(hiveParameter).doSaveToDB(Doc.title(), hiveParameter.Url, Doc.html(), hiveParameter.HostPathdir, true);
+			new HiveSaveData(hiveParameter).doSaveToDB(Doc.title(), hiveParameter.Url, Doc.select("p").text(), hiveParameter.HostPathdir, true);
 			
 			Elements pageAllUrls = Doc.select("a[href]");
 			for ( Element pageAllUrl : pageAllUrls ) {

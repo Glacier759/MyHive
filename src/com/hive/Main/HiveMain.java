@@ -10,9 +10,11 @@ public class HiveMain {
 		Config config = HiveConfig.getConfig();
 		String Username = config.getUsername();
 		String Url = config.getURL();
-		String Tinfo = config.getTinfo();
+		String Tinfo = config.getTinfo(); 	//keyword
+		String Ttag = config.getTtag(); 		//tTag
 		int Flag = config.getFlag();
-		HiveInit hiveInit = new HiveInit( Username, Url, Tinfo, Flag );
+		
+		HiveInit hiveInit = new HiveInit( Username, Url, Tinfo, Ttag,  Flag );
 		hiveInit.Start();
 		System.out.println("程序结束");
 	}

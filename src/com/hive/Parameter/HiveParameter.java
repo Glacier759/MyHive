@@ -18,7 +18,7 @@ public class HiveParameter {
 	*/
 
 	public int Flag, Maxpn = 20;
-	public String Username, Url, Tinfo;
+	public String Username, Url, Tinfo, Ttag;
 	public String Path, HostPathdir, Hostname, Title;
 	public HiveDatabase hiveDatabase;
 	public HiveRedis hiveRedis;

@@ -11,10 +11,11 @@ import com.hive.Parameter.HiveParameter;
 
 public class HiveInit {
 	private HiveParameter hiveParameter = new HiveParameter();
-	public HiveInit( String Username, String Url, String Tinfo, int Flag ) {
+	public HiveInit( String Username, String Url, String Tinfo, String Ttag, int Flag ) {
 		hiveParameter.Username = Username;
 		hiveParameter.Url = Url;
 		hiveParameter.Tinfo = Tinfo;
+		hiveParameter.Ttag = Ttag;
 		hiveParameter.Flag = Flag;
 		hiveParameter.Path = doMkdir();
 		System.out.println(hiveParameter.Path);

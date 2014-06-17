@@ -13,6 +13,7 @@ public class Config {
 	private String Username;
 	private String URL;
 	private String Tinfo;
+	private String Ttag;
 	private int Flag;
 	
 	public void setServerIP( String serverIP ) {	this.serverIP = serverIP;	}
@@ -27,6 +28,7 @@ public class Config {
 	public void setUsername( String Username ) {	this.Username = Username;	}
 	public void setURL( String URL ) {	this.URL = URL;	}
 	public void setTinfo( String Tinfo ) {	this.Tinfo = Tinfo;	}
+	public void setTtag( String Ttag ) {	this.Ttag = Ttag;	}
 	public void setFlag( int Flag ) {	this.Flag = Flag;	}
 	
 	public String getServerIP( ) {	return this.serverIP;	}
@@ -41,5 +43,6 @@ public class Config {
 	public String getUsername( ) {	return this.Username;	}
 	public String getURL(  ) {	return this.URL;	}
 	public String getTinfo( ) {	return this.Tinfo;	}
+	public String getTtag( ) {	return this.Ttag;	}
 	public int getFlag( ) {	return this.Flag;	}
 }
