@@ -3,11 +3,14 @@ package com.hive.Init;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.hive.Final.HiveFinal;
 import com.hive.Mode.HiveSearch;
 import com.hive.Mode.HiveVertical;
 import com.hive.Parameter.HiveParameter;
+import com.hive.Redis.HiveRedis;
 
 public class HiveInit {
 	private HiveParameter hiveParameter = new HiveParameter();
@@ -54,11 +57,12 @@ public class HiveInit {
 			System.out.println("flag = 2");
 		}
 		System.out.println("前提模块结束");
-		HiveFinal hiveFinal = new HiveFinal(hiveParameter);
-		Thread obj1 = new Thread(hiveFinal);
-		Thread obj2 = new Thread(hiveFinal);
-		obj1.start();
-		obj2.start();
+		List<HiveFinal> Threads = new ArrayList<HiveFinal>();
+		for ( int i = 0 ; i < hiveParameter.config.getThreadNumber(); i ++ ) {
+			HiveFinal obj = new HiveFinal( new HiveRedis(hiveParameter.config), hiveParameter, "Thread-"+i );
+			Threads.add(obj);
+			new Thread(obj).start();
+		}
 		//List<Thread> hiveFinalThread = new ArrayList<Thread>();
 		//for ( int i = 0; i < 10; i ++ ) {
 		//	Thread obj = new Thread(hiveFinal);

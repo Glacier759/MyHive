@@ -1,11 +1,55 @@
 package com.hive.Redis;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.hive.ReadConfig.Config;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisShardInfo;
+import redis.clients.jedis.ShardedJedis;
+import redis.clients.jedis.ShardedJedisPool;
 
+/*public class HiveRedis {
+	private String Key;
+	private JedisPool pool;
+	private String RedisIP;
+	private int RedisPort;
+	private ShardedJedisPool shardedJedisPool;
+	private ShardedJedis shardedJedis;
+	
+	public static void main( String[] args ) {
+		
+	}
+	public HiveRedis( Config config) {
+		RedisIP = config.getRedisIP();
+		RedisPort = config.getRedisPort();
+	}
+	public void ConnectRedis( ) {
+		JedisPoolConfig config = new JedisPoolConfig();
+		config.setMaxActive(20);
+		config.setMaxIdle(5);
+		config.setMaxWait(10001);
+		config.setTestOnBorrow(false);
+		List<JedisShardInfo> shards = new ArrayList<JedisShardInfo>();
+		shards.add(new JedisShardInfo( RedisIP, RedisPort, "master" ));
+		shardedJedisPool = new ShardedJedisPool( config, shards );
+	}
+	public ShardedJedis getShardedJedis() {
+		shardedJedis = shardedJedisPool.getResource();
+		return shardedJedis;
+	}
+	public void setKey( String Key ) {
+		this.Key = Key;
+	}
+	public void pushValue( String Value ) {
+		ShardedJedis shardedJedis = shardedJedisPool.getResource();
+		shardedJedis.lpush(this.Key, Value);
+		
+	}
+}*/
 public class HiveRedis {
 	
 	private String Key;

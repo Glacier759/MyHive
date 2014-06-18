@@ -26,6 +26,7 @@ public class HiveConfig {
 		config.setTinfo("糗事百科");
 		config.setTtag("钜派公司");
 		config.setFlag(2);
+		config.setThreadNumber(10);
 		
 		System.out.println(xStream.toXML(config));
 		FileUtils.writeStringToFile(new File("Hive.conf"), xStream.toXML(config));
