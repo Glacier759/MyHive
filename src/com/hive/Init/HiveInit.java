@@ -14,7 +14,7 @@ import com.hive.Redis.HiveRedis;
 
 public class HiveInit {
 	private HiveParameter hiveParameter = new HiveParameter();
-	public HiveInit( String Username, String Url, String Tinfo, String Ttag, int Flag ) {
+	public HiveInit( String Username, String Url, String Tinfo, String Ttag, int Flag ) throws Exception {
 		hiveParameter.Username = Username;
 		hiveParameter.Url = Url;
 		hiveParameter.Tinfo = Tinfo;
@@ -26,9 +26,9 @@ public class HiveInit {
 	}
 	
 	private String doMkdir() {
-		StringBuffer path = new StringBuffer(System.getProperty("user.dir") + File.separator + hiveParameter.Username);
+		StringBuffer path = new StringBuffer(hiveParameter.Path+ hiveParameter.Username);
 		try {
-			System.out.println("URL = " + hiveParameter.Url);
+			//System.out.println("URL = " + hiveParameter.Url);
 			URL SeedUrl = new URL(hiveParameter.Url);
 			hiveParameter.Hostname = SeedUrl.getHost();
 			path.append(File.separator + hiveParameter.Hostname);

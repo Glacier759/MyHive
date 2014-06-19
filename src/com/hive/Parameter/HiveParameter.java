@@ -23,11 +23,20 @@ public class HiveParameter {
 	public HiveDatabase hiveDatabase;
 	public HiveRedis hiveRedis;
 	public HiveLog hiveLog;
-	public Config config = HiveConfig.getConfig();
+	public Config config;
 	public HiveBloomFilter hiveBloomFilter;
+	static public String ConfigPath = null;
 	
-	public void OtherService() {
+	public void OtherService() throws Exception {
+		config = HiveConfig.getConfig();
 		System.out.println(config.getMysqlIP());
+		config.setFlag(Flag);
+		config.setUsername(Username);
+		config.setURL(Url);
+		config.setTinfo(Tinfo);
+		config.setTtag(Ttag);
+		HiveConfig.updateConfig(config);
+		this.Path = config.getSavePath();
 		// System.exit(0);
 		hiveLog = new HiveLog(config);
 		hiveBloomFilter = new HiveBloomFilter();

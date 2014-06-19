@@ -16,6 +16,7 @@ public class Config {
 	private String Ttag;
 	private int Flag;
 	private int ThreadNumber;
+	private String SavePath;
 	
 	public void setServerIP( String serverIP ) {	this.serverIP = serverIP;	}
 	public void setServerUser( String serverUser ) {	this.serverUser = serverUser;	}
@@ -32,6 +33,7 @@ public class Config {
 	public void setTtag( String Ttag ) {	this.Ttag = Ttag;	}
 	public void setFlag( int Flag ) {	this.Flag = Flag;	}
 	public void setThreadNumber( int ThreadNumber ) {	this.ThreadNumber = ThreadNumber;	}
+	public void setSavePath( String SavePath ) {	this.SavePath = SavePath;	}
 	
 	public String getServerIP( ) {	return this.serverIP;	}
 	public String getServerUser( ) {	return this.serverUser;	}
@@ -48,4 +50,5 @@ public class Config {
 	public String getTtag( ) {	return this.Ttag;	}
 	public int getFlag( ) {	return this.Flag;	}
 	public int getThreadNumber( ) {	return this.ThreadNumber;	}
+	public String getSavePath( ) {	return this.SavePath;	}
 }

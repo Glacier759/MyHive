@@ -1,9 +1,11 @@
 package com.hive.ReadConfig;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
+import com.hive.Parameter.HiveParameter;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -27,6 +29,7 @@ public class HiveConfig {
 		config.setTtag("钜派公司");
 		config.setFlag(2);
 		config.setThreadNumber(10);
+		config.setSavePath("~/");
 		
 		System.out.println(xStream.toXML(config));
 		FileUtils.writeStringToFile(new File("Hive.conf"), xStream.toXML(config));
@@ -41,11 +44,17 @@ public class HiveConfig {
 		//System.out.println("MySQL PORT = " + config.getMysqlPort());*/
 	}
 	
-	static public Config getConfig() {
+	static public void updateConfig( Config config ) throws Exception {
+		XStream xStream = new XStream( new DomDriver() );
+		//Config config = new Config();
+		xStream.alias("HiveConfig", config.getClass());
+		FileUtils.writeStringToFile(new File(HiveParameter.ConfigPath), xStream.toXML(config));
+	}
+	static public Config getConfig() throws IOException {
 		XStream xStream = new XStream( new DomDriver() );
 		Config config = new Config();
 		xStream.alias("HiveConfig", config.getClass());
-		config = (Config) xStream.fromXML(new File("Hive.conf"));
+		config = (Config) xStream.fromXML(new File(HiveParameter.ConfigPath));
 		return config;
 	}
 }

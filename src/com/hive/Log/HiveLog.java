@@ -7,9 +7,13 @@ import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 
+import ch.ethz.ssh2.Connection;
+import ch.ethz.ssh2.Session;
+import ch.ethz.ssh2.StreamGobbler;
+
 import com.hive.ReadConfig.Config;
 
-import ch.ethz.ssh2.*;
+
 
 public class HiveLog {
 
@@ -18,8 +22,8 @@ public class HiveLog {
 	
 	public HiveLog( Config config ) {
 		this.config = config;
-		NetworkTest();
-		ServiceTest();
+		//NetworkTest();
+		//ServiceTest();
 	}
 	
 	private boolean NetworkTest() {
