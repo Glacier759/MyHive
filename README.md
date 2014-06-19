@@ -36,3 +36,11 @@ MyHive
 >'Flag'				判断是搜索爬虫(2)还是垂直爬虫(1)
 
 >'ThreadNumber'		指定多线程模块的线程个数
+
+#JSP说明
+
+>部署在Tomcat上后访问localhost:8080/MyHive/Hive_S_basic.jsp
+
+>在标签栏填上信息后台即可开始数据抓取
+
+>待更新..
