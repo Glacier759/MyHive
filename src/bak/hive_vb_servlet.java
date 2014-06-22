@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hive.Main.*;
+import com.hive.Main.HiveMain;
+import com.hive.Parameter.HiveParameter;
 
 public class hive_vb_servlet extends HttpServlet {
 
@@ -23,35 +24,30 @@ public class hive_vb_servlet extends HttpServlet {
 	{
 		process(req,resp);
 	}
-
+	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) 
 				throws ServletException,IOException
 	{
 		process(req,resp);
 	}
-
+	
 	private void process(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException,IOException
 	{
-		String url = req.getParameter("url");
-		String tag = req.getParameter("tag");
+        req.setCharacterEncoding("utf-8");
+        String url = req.getParameter("url");
+        String tag = req.getParameter("tag");
+        resp.setCharacterEncoding("utf-8");
+        resp.setContentType("text/html;charset=utf-8");
+        String username = "user";
+        HiveMain m = new HiveMain();
+        try {
+			m.startHive(username, url, "", tag, 1);
+			PrintWriter out = resp.getWriter();
+			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><script>alert(\"数据抓取完成！\");window.location.href=\""+HiveParameter.DownloadURL+"\";//history.go(-1);</script>");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 
-		resp.setContentType("text/html");
-		resp.setCharacterEncoding("GBK");
-//		PrintWriter out = resp.getWriter();
-		String username = "user";
-		HiveMain mian = new HiveMain();
-
-		System.out.println(url);
-		System.out.println(tag);
-		System.out.println(username);
-
-//		mian.startHive(username, url, url, tag, 2);
-//		
-//		out.println("<html><head><title>test_sb</title></head></html>");
-//		out.println("<body>username:" +url+"<br>");
-//		out.println("password:	"+tag+"</body></html>");
-//		out.flush();
-//		
 	}
 }

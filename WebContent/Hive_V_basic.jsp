@@ -77,16 +77,16 @@
 					<div class="well col-md-2 sidebar-nav affix">
 						<ul class="nav nav-pills nav-stacked">
 							<li class="nav-header"><h4>垂直爬虫</h4></li>
-							<li class="active"><a href="./HiveConfig_V_C_basic.html">基本设置</a></li>
+							<li class="active"><a href="./Hive_V_basic.jsp">基本设置</a></li>
 							<li class="nav-header"><h4>搜索爬虫</h4></li>
-							<li><a href="./HiveConfig_S_C_basic.html">基本设置</a></li>
+							<li><a href="./Hive_S_basic.jsp">基本设置</a></li>
 							<li class="nav-header"><h4>通用</h4></li>
-							<li><a href="./HiveConfig_visual.html">多维数据监测</a></li>
+							<li><a href="#">多维数据监测</a></li>
 							<li><a href="#">开发者接口</a></li>
 						</ul>
 					</div>
 				</div>
-
+				
 				<div class="col-md-6 col-md-offset-1">
 					<div class="well col-md-6 sidebar-nav affix">
 						<form id="Form1" method="post" action="hive_vb" role="form">
@@ -104,7 +104,7 @@
   						</form>
 
 						<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>					
-
+				
 					</div>
 				</div>
 			</div>
@@ -118,7 +118,7 @@
 	<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
 	<script src="http://cdn.bootcss.com/highlight.js/7.3/highlight.min.js"></script>
-
+	
 	<script type="text/javascript">
 $(function () {
     $(document).ready(function() {
@@ -151,7 +151,7 @@ $(function () {
                 }
             },
             title: {
-                text: '每秒中爬虫抓取数据'
+                text: '当前Redis数据值'
             },
             xAxis: {
                 type: 'datetime',

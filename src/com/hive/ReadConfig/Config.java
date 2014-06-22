@@ -17,6 +17,8 @@ public class Config {
 	private int Flag;
 	private int ThreadNumber;
 	private String SavePath;
+	private int Maxpn;
+	private String DownloadURL;
 	
 	public void setServerIP( String serverIP ) {	this.serverIP = serverIP;	}
 	public void setServerUser( String serverUser ) {	this.serverUser = serverUser;	}
@@ -34,6 +36,8 @@ public class Config {
 	public void setFlag( int Flag ) {	this.Flag = Flag;	}
 	public void setThreadNumber( int ThreadNumber ) {	this.ThreadNumber = ThreadNumber;	}
 	public void setSavePath( String SavePath ) {	this.SavePath = SavePath;	}
+	public void setMaxpn( int Maxpn ) {	this.Maxpn = Maxpn;	}
+	public void setDownloadURL( String DownloadURL ) {	this.DownloadURL = DownloadURL;	}
 	
 	public String getServerIP( ) {	return this.serverIP;	}
 	public String getServerUser( ) {	return this.serverUser;	}
@@ -51,4 +55,6 @@ public class Config {
 	public int getFlag( ) {	return this.Flag;	}
 	public int getThreadNumber( ) {	return this.ThreadNumber;	}
 	public String getSavePath( ) {	return this.SavePath;	}
+	public int getMaxpn( ) {	return this.Maxpn;	}
+	public String getDownloadURL( ) {	return this.DownloadURL;	}
 }

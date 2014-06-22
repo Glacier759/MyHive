@@ -51,7 +51,8 @@ public class HiveSaveData {
 		XMLFormat xmlFormat = new XMLFormat();
 		xstream.alias("hive", xmlFormat.getClass());
 		SimpleDateFormat SDF = new SimpleDateFormat( "yyyy-MM-dd" );
-		File file = new File(SavePath + new Date().getTime() + ".xml");
+		//System.out.println(SavePath + "\t\t:" + hiveParameter.Username);
+		File file = new File(SavePath, new Date().getTime() + ".xml");
 		xmlFormat.setTitle(Title);
 		xmlFormat.setCrawltime(SDF.format(new Date()));
 		xmlFormat.setModifytime("");
@@ -72,7 +73,7 @@ public class HiveSaveData {
 			//System.exit(0);
 		} catch( IOException e ) {
 			hiveParameter.hiveLog.ErrLog("write error!");
-			e.printStackTrace();
+			System.out.println(e);
 		} catch( Exception e ) {
 			System.out.println(e);
 		}

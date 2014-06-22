@@ -59,7 +59,7 @@
 			</p>
 		</div>
 	</div>
-
+	
 	<div class="row">
 		<div class="well col-md-9 sidebar-nav affix">
 			<div class="panel-group" id="accordion">

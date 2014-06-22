@@ -77,19 +77,20 @@
 					<div class="well col-md-2 sidebar-nav affix">
 						<ul class="nav nav-pills nav-stacked">
 							<li class="nav-header"><h4>垂直爬虫</h4></li>
-							<li><a href="./HiveConfig_V_C_basic.html">基本设置</a></li>
+							<li><a href="./Hive_V_basic.jsp">基本设置</a></li>
 							<li class="nav-header"><h4>搜索爬虫</h4></li>
-							<li class="active"><a href="HiveConfig_S_C_basic.html">基本设置</a></li>
+							<li class="active"><a href="./Hive_S_basic.jsp">基本设置</a></li>
 							<li class="nav-header"><h4>通用</h4></li>
-							<li><a href="./HiveConfig_visual.html">多维数据监测</a></li>
+							<li><a href="#">多维数据监测</a></li>
 							<li><a href="#">开发者接口</a></li>
 						</ul>
 					</div>
 				</div>
-
+				
 				<div class="col-md-6 col-md-offset-1">
 					<div class="well col-md-6 sidebar-nav affix">
 						<form method="post" action="hive_sb" role="form">
+						<!-- <form method="post" action="#" role="form">-->
   							<div class="form-group">
     							<label for="seed1">请输入抓取关键字</label>
     							<input  class="form-control" name="keyword" placeholder="Please input the key word">
@@ -104,7 +105,7 @@
   						</form>
 
 						<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>					
-
+				
 					</div>
 				</div>
 			</div>
@@ -118,7 +119,7 @@
 	<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<script src="http://cdn.bootcss.com/holder/2.0/holder.min.js"></script>
 	<script src="http://cdn.bootcss.com/highlight.js/7.3/highlight.min.js"></script>
-
+	
 	<script type="text/javascript">
 $(function () {
     $(document).ready(function() {
@@ -141,15 +142,17 @@ $(function () {
                         var series = this.series[0];
                         setInterval(function() {
                             var x = (new Date()).getTime(), // current time
-                                y = Math.random();
+//                                y = Math.random();
 //                            	y = 1;
+                            y = datas[0];
+                            datas.splice(0, 1);
                             series.addPoint([x, y], true, true);
                         }, 1000);
                     }
                 }
             },
             title: {
-                text: '每秒中爬虫抓取数据'
+                text: '当前Redis数据值'
             },
             xAxis: {
                 type: 'datetime',
@@ -189,8 +192,9 @@ $(function () {
                     for (i = -19; i <= 0; i++) {
                         data.push({
                             x: time + i * 1000,
-                            y: Math.random()
-
+                            //y: Math.random()
+                            y: 0
+						
                         });
                     }
                     return data;
@@ -200,9 +204,65 @@ $(function () {
     });
     
 });
+var datas = [];
+function yy(){
+    $.ajax({
+        type:"get",
+        url:"hive_data",
+        dataType:'json',
+        data:{},
+        success:function(data){
+        //			alert(data);
+        //			document.getElementById('rand').innerHTML = data;
+        datas.push(data);
+        }
+    });
+}
+setInterval(yy, 1000);
 </script>
 
+        <script type="text/javascript">
+            function ajaxSubmit(frm, fn) {
+                var dataPara = getFormJson(frm);
+                $.ajax({
+                    //url: frm.action,
+                    url: frm.action,
+                    type: frm.method,
+                    data: dataPara,
+                    success: function(){
+                        //alert("the end");
+                    }
+                });
+            }
+            //将form中的值转换为键值对。
+            function getFormJson(frm) {
+                var o = {};
+                var a = $(frm).serializeArray();
+                $.each(a, function () {
+                    if (o[this.name] !== undefined) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
+                        }
+                        o[this.name].push(this.value || '');
+                        
+                    } else {
+                        o[this.name] = this.value || '';
+                    }
+                });
+                return o;
+            }
+        </script>
 
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#Form1').bind('submit', function(){
+                    ajaxSubmit(this, function(data){
+                        alert(data);
+                    });
+                    return false;
+                });
+            });
+        </script>
   </body>
 </html>
 

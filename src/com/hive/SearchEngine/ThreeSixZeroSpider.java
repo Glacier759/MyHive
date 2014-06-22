@@ -20,7 +20,7 @@ public class ThreeSixZeroSpider {
 	public Set<String> doParse360() {
 		try {
 			Set<String> UrlSet = new HashSet<String>();
-			for ( int i = 0; i < hiveParameter.Maxpn; i ++ ) {
+			for ( int i = 1; i <= hiveParameter.config.getMaxpn(); i ++ ) {
 				String SearchURL = "http://www.so.com/s?q=" + hiveParameter.Tinfo + "&pn=" + i;
 				System.out.println(SearchURL);
 				Document Doc = Jsoup.connect(SearchURL).timeout(50000)

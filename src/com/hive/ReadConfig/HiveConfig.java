@@ -30,6 +30,7 @@ public class HiveConfig {
 		config.setFlag(2);
 		config.setThreadNumber(10);
 		config.setSavePath("~/");
+		config.setMaxpn(20);
 		
 		System.out.println(xStream.toXML(config));
 		FileUtils.writeStringToFile(new File("Hive.conf"), xStream.toXML(config));

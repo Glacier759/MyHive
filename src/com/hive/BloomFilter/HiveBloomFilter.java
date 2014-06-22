@@ -39,4 +39,8 @@ public class HiveBloomFilter {
 		}
 		return true;
 	}
+	
+	public void clearBitset() {
+		this.bitset.clear();
+	}
 }

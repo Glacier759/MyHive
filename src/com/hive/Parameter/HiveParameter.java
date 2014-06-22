@@ -17,7 +17,7 @@ public class HiveParameter {
 	private String Title;
 	*/
 
-	public int Flag, Maxpn = 20;
+	public int Flag;
 	public String Username, Url, Tinfo, Ttag;
 	public String Path, HostPathdir, Hostname, Title;
 	public HiveDatabase hiveDatabase;
@@ -26,10 +26,13 @@ public class HiveParameter {
 	public Config config;
 	public HiveBloomFilter hiveBloomFilter;
 	static public String ConfigPath = null;
+	static public String FilePath = null;
+	static public String DownloadURL;
 	
 	public void OtherService() throws Exception {
 		config = HiveConfig.getConfig();
-		System.out.println(config.getMysqlIP());
+		//System.out.println(config.getMysqlIP());
+		//System.out.println("Username = " + Username);
 		config.setFlag(Flag);
 		config.setUsername(Username);
 		config.setURL(Url);
@@ -37,6 +40,7 @@ public class HiveParameter {
 		config.setTtag(Ttag);
 		HiveConfig.updateConfig(config);
 		this.Path = config.getSavePath();
+		DownloadURL = config.getDownloadURL();
 		// System.exit(0);
 		hiveLog = new HiveLog(config);
 		hiveBloomFilter = new HiveBloomFilter();

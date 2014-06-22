@@ -29,13 +29,15 @@ public class HiveSearch {
 			Set<String> UrlSet = Spider360.doParse360();
 			System.out.println(UrlSet.size());
 			Iterator<String> itr = UrlSet.iterator();
+			int NO = UrlSet.size();
 			while( itr.hasNext() ) {
 				String purl = itr.next();
-				System.out.println(purl);
+				System.out.println("剩余："+NO+"\t"+purl);
 				String Hostname = new URL(purl).getHost();
+				NO--;
 				Document Doc = null;
 				try {
-					Doc = Jsoup.connect(purl).timeout(50000)
+					Doc = Jsoup.connect(purl).timeout(5000)
 						.userAgent("Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36")
 						.get();
 				} catch( SocketTimeoutException e ) {
@@ -44,9 +46,11 @@ public class HiveSearch {
 				} catch( HttpStatusException e ) {
 					System.out.println("HiveSearch-doSaveData-45:\t" + e);
 					continue;
+				} catch( Exception e ) {
+					System.out.println(e);
 				}
 				//hiveParameter.hiveDatabase.insertUrl(purl);
-				new HiveSaveData(hiveParameter).doSaveToDB(Doc.title(), purl, Doc.select("p").text(), hiveParameter.Path, true);
+				new HiveSaveData(hiveParameter).doSaveToDB(Doc.title(), purl, Doc.select("p").text(), hiveParameter.config.getSavePath()+hiveParameter.Ttag, true);
 				Elements pageAllUrls = Doc.select("a[href]");
 				for ( Element pageAllUrl : pageAllUrls ) {
 					String pageUrl = pageAllUrl.attr("abs:href");
@@ -61,8 +65,8 @@ public class HiveSearch {
 					}
 				}
 			}
-		} catch( IOException e ) {
-			e.printStackTrace();
+		} catch( Exception e ) {
+			System.out.println(e);
 		}
 	}
 }

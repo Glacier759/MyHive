@@ -1,9 +1,11 @@
 package com.hive.Init;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.hive.Final.HiveFinal;
@@ -20,8 +22,8 @@ public class HiveInit {
 		hiveParameter.Tinfo = Tinfo;
 		hiveParameter.Ttag = Ttag;
 		hiveParameter.Flag = Flag;
-		hiveParameter.Path = doMkdir();
-		System.out.println(hiveParameter.Path);
+		//hiveParameter.Path = doMkdir();
+		//System.out.println(hiveParameter.Path);
 		hiveParameter.OtherService();
 	}
 	
@@ -41,6 +43,7 @@ public class HiveInit {
 			path = path.append(File.separator + info);
 		}
 		path = path.append(File.separator);
+		System.out.println("Path = "  + path);
 		new File(path.toString()).mkdirs();
 		return path.toString();
 	}
@@ -57,17 +60,52 @@ public class HiveInit {
 			System.out.println("flag = 2");
 		}
 		System.out.println("前提模块结束");
-		List<HiveFinal> Threads = new ArrayList<HiveFinal>();
+		System.out.println("Redis中URL的个数 = " + hiveParameter.hiveRedis.getLength());
+		List<Thread> Threads = new ArrayList<Thread>();
 		for ( int i = 0 ; i < hiveParameter.config.getThreadNumber(); i ++ ) {
+			
 			HiveFinal obj = new HiveFinal( new HiveRedis(hiveParameter.config), hiveParameter, "Thread-"+i );
-			Threads.add(obj);
-			new Thread(obj).start();
+			Thread t = new Thread(obj);
+			Threads.add(t);
+			t.start();
 		}
+		for ( Thread obj : Threads ) {
+			try {
+				obj.join();
+			} catch (InterruptedException e) {
+				System.out.println(e);
+			}
+		}
+	hiveParameter.hiveLog.SysLog(hiveParameter.config.getSavePath());
+	System.out.println(hiveParameter.config.getUsername() +"\t\t:" + hiveParameter.config.getSavePath());
 		//List<Thread> hiveFinalThread = new ArrayList<Thread>();
 		//for ( int i = 0; i < 10; i ++ ) {
 		//	Thread obj = new Thread(hiveFinal);
 		//	hiveFinalThread.add(obj);
 		//	obj.start();
 		//}
+		String FilePath = hiveParameter.config.getSavePath()+hiveParameter.Ttag;
+		String FileName = new Date().getTime()+".tar.gz";
+		String TargetFile = hiveParameter.config.getSavePath()+FileName;
+		HiveParameter.FilePath = FilePath;
+		System.out.println(FilePath+":  " + TargetFile);
+		try {
+			Runtime.getRuntime().exec("tar zcvf " + TargetFile + " -C " + hiveParameter.config.getSavePath() + " " + hiveParameter.Ttag);
+			hiveParameter.hiveLog.SysLog("DowunUrl = " + HiveParameter.DownloadURL);
+			HiveParameter.DownloadURL = HiveParameter.DownloadURL+FileName;
+			System.out.println(HiveParameter.DownloadURL);
+			hiveParameter.hiveLog.SysLog("FileName = " + HiveParameter.DownloadURL);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		hiveParameter.hiveBloomFilter.clearBitset();
+	}
+	
+	public static void destroyDir( String FileName ) {
+		try {
+			Runtime.getRuntime().exec("rm -rf " + FileName);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 }

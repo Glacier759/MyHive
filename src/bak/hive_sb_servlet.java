@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hive.Main.*;
+import com.hive.Init.HiveInit;
+import com.hive.Main.HiveMain;
+import com.hive.Parameter.HiveParameter;
 
 public class hive_sb_servlet extends HttpServlet {
 
@@ -16,27 +18,17 @@ public class hive_sb_servlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) 
 				throws ServletException,IOException
 	{
-		try {
-			process(req,resp);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		process(req,resp);
 	}
-
+	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) 
 				throws ServletException,IOException
 	{
-		try {
-			process(req,resp);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		process(req,resp);
 	}
-
+	
 	private void process(HttpServletRequest req, HttpServletResponse resp)
-			throws Exception
+			throws ServletException,IOException
 	{
 		req.setCharacterEncoding("utf-8");
 		String keyword = req.getParameter("keyword");
@@ -44,9 +36,16 @@ public class hive_sb_servlet extends HttpServlet {
 		resp.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html;charset=utf-8");
 		String username = "user";
-		System.out.println("Keyword = " + keyword + "\t" + tag);
 		HiveMain m = new HiveMain();
-		m.startHive(username, "http://www.baidu.com", keyword, tag, 2);
-		
+		try {
+			m.startHive(username, "", keyword, tag, 2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e);
+		}
+		PrintWriter out = resp.getWriter();
+		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><script>alert(\"数据抓取完成！\");window.location.href=\""+HiveParameter.DownloadURL+"\";//history.go(-1);</script>");
+		//HiveInit.destroyDir(HiveParameter.FilePath);
+		out.close();
 	}
 }
