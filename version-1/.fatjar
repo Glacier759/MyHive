@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Thu Jun 19 21:15:32 CST 2014
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=MyHiveJSP_fat.jar
+manifest.mergeall=true
+manifest.mainclass=com.hive.Main.HiveMain
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=
