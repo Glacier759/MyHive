@@ -7,5 +7,5 @@ MyHive
 
 >version-2 Start
 
->版本0.2[Hive-v0.2]{https://github.com/Glacier759/Hive-v0.2}作为新的项目与Junco合作完成
+>版本0.2[Hive-v0.2](https://github.com/Glacier759/Hive-v0.2)作为新的项目与Junco合作完成
 
